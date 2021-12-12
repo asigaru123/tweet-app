@@ -12,5 +12,3 @@ hooks:
     - location: scripts/docker-compose_start
       timeout: 300
       runas: root
-
-
