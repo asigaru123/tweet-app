@@ -8,7 +8,7 @@ hooks:
     - location: scripts/docker-compose_build
       timeout: 300
       runas: root
-  ApplicationStart:
+  ValidateService:
     - location: scripts/docker-compose_start
       timeout: 300
       runas: root
