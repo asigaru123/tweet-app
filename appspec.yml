@@ -4,11 +4,15 @@ files:
   - source: /
     destination: /home/ec2-user
 hooks:
-  ValidateService:
-    - location: scripts/docker-compose_build
+  ApplicationStop:
+    - location: scripts/down.sh
       timeout: 300
       runas: root
   ValidateService:
-    - location: scripts/docker-compose_start
+    - location: scripts/build.sh
+      timeout: 300
+      runas: root
+  ValidateService:
+    - location: scripts/start.sh
       timeout: 300
       runas: root
