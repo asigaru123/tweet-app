@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    command: npm start
+    ports:
+      - 80:3000
+    networks:
+      frontend:
+        ipv4_address: 172.16.1.10
+
+  app:
+    depends_on:
+      - db
+    build:
+      context: ./docker/app
+    command: java -jar ./Tweet-App-0.0.1-SNAPSHOT.jar
+    networks:
+      frontend:
+        ipv4_address: 172.16.1.20
+      backend:
+        ipv4_address: 172.16.2.20
+
+  db:
+    image: mysql:8.0.25
+    volumes:
+      - mysql_volume:/var/lib/mysql
+    networks:
+      backend:
+        ipv4_address: 172.16.2.30
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tweet_app_db
+
+volumes:
+  mysql_volume:
+
+networks:
+  frontend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.1.0/24
+
+  backend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.2.0/24

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rest.home.repository.HomeMapper">
+
+	<select id="getAllTweets" resultType="rest.home.model.Tweet">
+		SELECT
+			tweet.id,
+			user.email,
+			user.username,
+			tweet.tweet,
+			tweet.updatetime,
+			user.profileImage
+		FROM user INNER JOIN tweet ON user.email = tweet.email ORDER BY updatetime DESC 
+	</select>
+
+	<select id="getMyTweets" resultType="rest.home.model.Tweet">
+		SELECT
+			tweet.id,
+			user.email,
+			user.username,
+			tweet.tweet,
+			tweet.updatetime,
+			user.profileImage
+		FROM user INNER JOIN tweet ON user.email = tweet.email
+		WHERE tweet.email=#{email} ORDER BY updatetime DESC
+	</select>
+	
+	<insert id="insertTweet">
+		INSERT INTO tweet(email, time, updatetime, tweet) VALUES(#{email}, #{time}, #{updatetime}, #{tweet})
+	</insert>
+	
+	<update id="updateTweet">
+		UPDATE tweet SET updatetime=#{updatetime}, tweet=#{tweet} WHERE id=#{id} AND email=#{email}
+	</update>
+	
+	<delete id="deleteTweet">
+		DELETE FROM tweet WHERE email=#{email} AND id=#{id}
+	</delete>
+	
+	<select id="tweetLikeCount" resultType="int">
+		SELECT COUNT( * ) FROM tweetlike WHERE tweetid=#{tweetid}
+	</select>
+	
+	<insert id="insertTweetLike">
+		INSERT INTO tweetlike(email, tweetid) VALUES(#{email}, #{tweetid})
+	</insert>
+	
+	<delete id="deleteTweetLike">
+		DELETE FROM tweetlike WHERE email=#{email} AND tweetid=#{tweetid}
+	</delete>
+	
+	<select id="getTweetLikeList" resultType="String">
+		SELECT email FROM tweetlike WHERE tweetid=#{tweetid}
+	</select>
+	
+	<select id="getTweetCommentCount" resultType="int">
+		SELECT COUNT( * ) FROM tweetcomment WHERE tweetid=#{tweetid}
+	</select>
+	
+	<select id="getTweetComment" resultType="rest.home.model.TweetCommentResource">
+		SELECT
+			tweetcomment.id,
+			tweetcomment.email,
+			user.username,
+			tweetcomment.tweetid,
+			tweetcomment.comment,
+			tweetcomment.time,
+			user.profileImage
+			FROM tweetcomment INNER JOIN user ON tweetcomment.email = user.email
+			WHERE tweetcomment.tweetid=#{tweetid} ORDER BY time ASC;
+	</select>
+	
+	<insert id="insertTweetComment">
+		INSERT INTO tweetcomment(email, tweetid, time, comment) VALUES(#{email}, #{tweetid}, #{time}, #{comment})
+	</insert>
+	
+	<insert id="insertFollow">
+		INSERT INTO follow(email, followemail, time) VALUES(#{email}, #{followemail}, #{time})
+	</insert>
+	
+	<delete id="deleteFollow">
+		DELETE FROM follow WHERE email=#{email} AND followemail=#{followemail}
+	</delete>
+
+</mapper>

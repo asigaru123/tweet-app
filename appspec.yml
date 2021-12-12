@@ -1,0 +1,20 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user
+hooks:
+  ApplicationStop:
+    - location: scripts/docker-compose_down
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/docker-compose_build
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/docker-compose_start
+      timeout: 300
+      runas: root
+
+
