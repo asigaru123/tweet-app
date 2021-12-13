@@ -5,13 +5,17 @@ files:
     destination: /home/ec2-user
 permissions:
   - object: /
-    pattern: "*.sh"
+    pattern: "*scripts*"
     owner: ec2-user
     group: ec2-user
     mode: 744
     type:
-      - file
+      - directory
 hooks:
+  AfterInstall:
+    - location: scripts/down.sh
+      timeout: 300
+      runas: root
   ValidateService:
     - location: scripts/build.sh
       timeout: 300
