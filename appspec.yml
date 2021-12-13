@@ -12,7 +12,7 @@ permissions:
     type:
       - file
 hooks:
-  ApplicationStop:
+  AfterInstall:
     - location: scripts/down.sh
       timeout: 300
       runas: root
