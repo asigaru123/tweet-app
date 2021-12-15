@@ -9,6 +9,3 @@ phases:
       - echo Build Start
       - cd springboot
       - mvn package
-artifacts:
-  files:
-    - target/Tweet-App-0.0.1-SNAPSHOT.jar
