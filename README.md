@@ -39,9 +39,9 @@ Twitterのようなつぶやきアプリを作成しました。
     - ALB
     - ACM
     - Route53
-    - CodeDeploy
+    - CodePipeline、CodeBuild、CodeDeploy
 
-### 苦労した点・工夫した点
+### ポイント
 - ログイン認証にJWTを活用
   - トークン認証を活用し、Rest APIにおける認証環境を実装
 
