@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: openjdk11
+  build:
+    commands:
+      - echo Build Start
+      - cd springboot
+      - mvn package
+artifacts:
+  files:
+    - target/Tweet-App-0.0.1-SNAPSHOT.jar
