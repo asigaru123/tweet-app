@@ -62,7 +62,7 @@ export const SignupModal: VFC<Props> = (props) => {
                                     w="100%"
                                     fontWeight="bold"
                                     _hover={{opacity: "0.7"}}
-                                    value="ログイン"
+                                    value="登録"
                                 />
                             </form>
                         </Box>
