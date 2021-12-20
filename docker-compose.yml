@@ -16,7 +16,8 @@ services:
     depends_on:
       - db
     build:
-      context: ./docker/app
+      context: .
+      dockerfile: ./docker/app/Dockerfile
     command: java -jar ./Tweet-App-0.0.1-SNAPSHOT.jar
     networks:
       frontend:
