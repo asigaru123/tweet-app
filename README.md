@@ -49,4 +49,4 @@ Twitterのようなつぶやきアプリを作成しました。
   - いいね・フォロー済みかどうかを判別し、いいね・フォローされていれば、解除する機能を追加
 
 ### AWS構成図
-![AWS構成図](https://user-images.githubusercontent.com/95522385/147403747-5788c48f-5af3-41ec-9233-b8b2a0ab800d.png)
+![AWS構成図](https://user-images.githubusercontent.com/95522385/147403840-76b84c93-1674-4d6a-a8ca-d49f89682814.png)
