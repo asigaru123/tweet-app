@@ -43,7 +43,7 @@ Twitterのようなつぶやきアプリを作成しました。
 - ACMによるHTTPS化のため、ALBを導入しております。
 - CI/CDパイプラインの構築には、CodePipeline、CodeBuild、CodeDeployを使用しております。
 
-## こだわった点
+## 工夫した点
 - ログイン認証にJWTを活用
   - トークン認証を活用し、Rest APIにおける認証環境を実装
 
