@@ -49,4 +49,7 @@ Twitterのようなつぶやきアプリを作成しました。
   - いいね・フォロー済みかどうかを判別し、いいね・フォローされていれば、解除する機能を追加
 
 ### AWS構成図
+- 主にEC2、ALB、ACM、Route53、CodePipeline、CodeBuild、CodeDeployを利用しました。
+- ACMによるHTTPS化のため、ALBを導入しております。
+- CI/CDパイプラインの構築には、CodePipeline、CodeBuild、CodeDeployを使用しております。
 ![AWS構成図](https://user-images.githubusercontent.com/95522385/147403840-76b84c93-1674-4d6a-a8ca-d49f89682814.png)
