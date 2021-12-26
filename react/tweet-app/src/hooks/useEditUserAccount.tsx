@@ -15,7 +15,6 @@ export const useEditUserAccount = () => {
             showMessage({title: res.data as string, status: "success"});
             setEditUserAccount(false);
             findUserAccount();
-            console.log(loginUser.username);
         })
         .catch((res) => {
             showMessage({title: res.data as string, status: "success"});

@@ -36,7 +36,8 @@ export const Tweet: VFC = () => {
         getAllTweets();
         getMyFollow();
         getProfileImage();
-    }, [tweetLikeState, tweetCommentState, changeFollowState, history, loginUser.token]);//followState, getAllTweets, getMyFollow
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [tweetLikeState, tweetCommentState, changeFollowState, history, loginUser.token]);
 
     return (
         <>

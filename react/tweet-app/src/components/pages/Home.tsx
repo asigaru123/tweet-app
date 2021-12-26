@@ -45,9 +45,14 @@ export const Home: VFC = () => {
         if(loginUser.token === undefined){
             history.push("/");
         };
+        let unmounted = false;
         getMyTweets();
         getMyFollow();
         getProfileImage();
+        return () => {
+            unmounted = true;
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [insertTweetState, updateTweetState, deleteTweetState]);
 
     return (

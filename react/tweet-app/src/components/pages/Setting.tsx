@@ -40,6 +40,7 @@ export const Setting: VFC = () => {
             history.push("/");
         };
         getMyFollow();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [history, loginUser.token]);
 
     return (
