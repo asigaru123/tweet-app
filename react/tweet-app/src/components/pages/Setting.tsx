@@ -2,11 +2,13 @@ import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Input } from "@chakra-ui/input";
 import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/layout";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader } from "@chakra-ui/modal";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
-import { useEffect, VFC } from "react";
+import { useEffect, useRef, useState, VFC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { useCurrentLoginUser } from "../../hooks/useCurrentLoginUser";
+import { useDeleteUserAccount } from "../../hooks/useDeleteUserAccount";
 import { useEditUserAccount } from "../../hooks/useEditUserAccount";
 import { useFollow } from "../../hooks/useFollow";
 import { useMessage } from "../../hooks/useMessage";
@@ -23,6 +25,7 @@ export const Setting: VFC = () => {
     const history = useHistory();
     const {loginUser} = useCurrentLoginUser();
     const {editUserAccount} = useEditUserAccount();
+    const {deleteUserAccount} = useDeleteUserAccount();
     const {getMyFollow} = useFollow();
     const {showMessage} = useMessage();
     const {register, reset, formState: { errors }, handleSubmit} = useForm<IFormInput>();
@@ -33,6 +36,13 @@ export const Setting: VFC = () => {
             editUserAccount(data.password, data.username);
             reset();
         };
+    };
+
+    const [userDelIsOpen, setUserDelIsOpen] = useState(false);
+    const userDelOnClose = () => setUserDelIsOpen(false);
+    const cancelRef = useRef<HTMLButtonElement>(null);
+    const onClickUserDel = () => {
+        deleteUserAccount();
     };
 
     useEffect(() => {
@@ -82,6 +92,28 @@ export const Setting: VFC = () => {
                                 <Input type="submit" backgroundColor="gray.400" fontWeight="bold" _hover={{opacity: "0.7"}} value="変更"/>
                             </Box>
                         </form>
+                        <Box mt={2}>
+                            <Button w="100%" backgroundColor="red.300" fontWeight="bold" _hover={{opacity: "0.7"}} onClick={() => setUserDelIsOpen(true)}>ユーザーを削除する</Button>
+                        </Box>
+                        <AlertDialog isOpen={userDelIsOpen} leastDestructiveRef={cancelRef} onClose={userDelOnClose}>
+                            <AlertDialogContent>
+                                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                                    <Text>ユーザー削除</Text>
+                                </AlertDialogHeader>
+                                <AlertDialogBody>
+                                    <Text>ユーザーを削除しますがよろしいですか？</Text>
+                                </AlertDialogBody>
+                                <AlertDialogFooter>
+                                <Button mr={2} ref={cancelRef} onClick={userDelOnClose}>Cancel</Button>
+                                    <Button backgroundColor="red.300" onClick={() => {
+                                        onClickUserDel();
+                                        onClose();
+                                    }}>
+                                        削除
+                                    </Button>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </Box>
                 </Flex>
                 <Box mt={12}>
