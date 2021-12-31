@@ -3,6 +3,7 @@ package rest.login.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +46,19 @@ public class LoginController {
 			responseEntity = new ResponseEntity<String>("ユーザー情報を更新しました。", HttpStatus.CREATED);
 		}else {
 			responseEntity = new ResponseEntity<String>("ユーザー情報の更新に失敗しました。", HttpStatus.BAD_REQUEST);
+		}
+		return responseEntity;
+	}
+	
+	@DeleteMapping("/deleteUserAccount/{email:.+}")
+	public ResponseEntity<Void> deleteUserAccount(@PathVariable("email") String email){
+		int result = loginService.deleteUserAccount(email);
+		
+		ResponseEntity<Void> responseEntity = null;
+		if(result > 0) {
+			responseEntity = new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}else {
+			responseEntity = new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
 		return responseEntity;
 	}

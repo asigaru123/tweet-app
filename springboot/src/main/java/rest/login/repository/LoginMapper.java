@@ -20,6 +20,8 @@ public interface LoginMapper {
 	
 	public int editUserAccount(EditUserAccount editUserAccount);
 	
+	public int deleteUserAccount(String email);
+	
 	public List<Follow> getMyFollow(String email);
 	
 	public List<Follower> getMyFollower(String email);

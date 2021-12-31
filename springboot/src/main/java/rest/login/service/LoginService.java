@@ -60,6 +60,10 @@ public class LoginService {
 		return loginMapper.editUserAccount(editUserAccount);
 	}
 	
+	public int deleteUserAccount(String email) {
+		return loginMapper.deleteUserAccount(email);
+	}
+	
 	public List<FollowResource> getMyFollow(String email){
 		List<Follow> list = loginMapper.getMyFollow(email);
 		
