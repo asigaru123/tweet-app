@@ -23,6 +23,10 @@
 		WHERE email=#{email}
 	</update>
 	
+	<delete id="deleteUserAccount">
+		DELETE FROM user WHERE email=#{email}
+	</delete>
+	
 	<select id="getMyFollow" resultType="rest.login.model.Follow">
 		SELECT * FROM follow WHERE email=#{email}
 	</select>

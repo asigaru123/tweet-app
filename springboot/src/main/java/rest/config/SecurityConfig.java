@@ -34,8 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	LoginMapper userMapper;
 	
-	@Value("${originIp}")
-	private String originIp;
+//	@Value("${originIp}")
+//	private String originIp;
 	
 	@Value("${secretKey}")
 	private String secretKey;
@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authenticationEntryPoint(authenticationEntryPoint())
 		.accessDeniedHandler(accessDeniedHandler());
 		
-		http.cors().configurationSource(corsConfigurationSource());
+//		http.cors().configurationSource(corsConfigurationSource());
 	}
 	
 	@Override
@@ -86,20 +86,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
-	private CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration corsConfiguration = new CorsConfiguration();
-		corsConfiguration.addAllowedMethod("GET");
-		corsConfiguration.addAllowedMethod("POST");
-		corsConfiguration.addAllowedMethod("PATCH");
-		corsConfiguration.addAllowedMethod("DELETE");
-		corsConfiguration.addAllowedHeader(CorsConfiguration.ALL);
-		corsConfiguration.addAllowedOrigin(originIp);
-		
-		UrlBasedCorsConfigurationSource corsSource = new UrlBasedCorsConfigurationSource();
-		corsSource.registerCorsConfiguration("/**", corsConfiguration);
-		
-		return corsSource;
-	}
+//	private CorsConfigurationSource corsConfigurationSource() {
+//		CorsConfiguration corsConfiguration = new CorsConfiguration();
+//		corsConfiguration.addAllowedMethod("GET");
+//		corsConfiguration.addAllowedMethod("POST");
+//		corsConfiguration.addAllowedMethod("PATCH");
+//		corsConfiguration.addAllowedMethod("DELETE");
+//		corsConfiguration.addAllowedHeader(CorsConfiguration.ALL);
+//		corsConfiguration.addAllowedOrigin(originIp);
+//		
+//		UrlBasedCorsConfigurationSource corsSource = new UrlBasedCorsConfigurationSource();
+//		corsSource.registerCorsConfiguration("/**", corsConfiguration);
+//		
+//		return corsSource;
+//	}
 	
 	AuthenticationFailureHandler authenticationFailureHandler() {
 		return new CustomAuthenticationFailureHandler();
