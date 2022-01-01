@@ -6,4 +6,5 @@ WORKDIR /app
 COPY ./react/tweet-app/ ./tweet-app
 RUN chmod +x ./tweet-app/node_modules/.bin/react-scripts
 WORKDIR /app/tweet-app
+RUN npm install
 ENV DANGEROUSLY_DISABLE_HOST_CHECK=true
