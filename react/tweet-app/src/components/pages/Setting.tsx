@@ -49,7 +49,9 @@ export const Setting: VFC = () => {
         if(loginUser.token === undefined){
             history.push("/");
         };
-        getMyFollow();
+        if(loginUser.email !== undefined){
+            getMyFollow();
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [history, loginUser.token]);
 
@@ -75,7 +77,7 @@ export const Setting: VFC = () => {
                             <Stack spacing={1}>
                                 <Box>
                                     <Text fontWeight="bold">E-Mail</Text>
-                                    <Input readOnly value={loginUser.email}/>
+                                    <Input readOnly value={loginUser.email === undefined ? ("") : (loginUser.email)}/>
                                 </Box>
                                 <Box>
                                     <Text fontWeight="bold">Password</Text>

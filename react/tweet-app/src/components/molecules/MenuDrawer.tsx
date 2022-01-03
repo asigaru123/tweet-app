@@ -19,31 +19,31 @@ export const MenuDrawer: VFC<Props> = (props) => {
         <Drawer placement="left" onClose={onClose} isOpen={isOpen} variant="outline">
             <DrawerOverlay>
                 <DrawerContent>
-                    <Box backgroundColor="teal.600">
-                    <DrawerHeader>Menu</DrawerHeader>
+                    <Box backgroundColor="teal.600" fontSize="xl">
+                        <DrawerHeader>Menu</DrawerHeader>
                     </Box>
                     <DrawerBody>
-                        <Box p={2} fontSize="xl" fontWeight="bold">
+                        <Box p={2} fontSize="3xl" fontWeight="bold">
                             <Stack>
                                 <Flex align="center" onClick={() => {
                                     onClickGoHome();
                                     onClose();
                                 }}>
-                                    <FaHome size={20} />
+                                    <FaHome size={30}/>
                                     <Text ml={2}>Home</Text>
                                 </Flex>
                                 <Flex align="center" onClick={() => {
                                     onClickGoTweet();
                                     onClose();
                                 }}>
-                                    <FaWeixin size={20} />
+                                    <FaWeixin size={30}/>
                                     <Text ml={2}>Tweet</Text>
                                 </Flex>
                                 <Flex align="center" onClick={() => {
                                     onClickGoSetting();
                                     onClose();
                                 }}>
-                                    <FaWrench size={20}/>
+                                    <FaWrench size={30}/>
                                     <Text ml={2}>Setting</Text>
                                 </Flex>
                             </Stack>
