@@ -14,10 +14,9 @@ interface IFormInput {
 export const Login: VFC = () => {
     const {onOpen, isOpen, onClose} = useDisclosure();
     const {login} = useLoginUser();
-    const {register, reset, formState: { errors }, handleSubmit} = useForm<IFormInput>();
+    const {register, formState: { errors }, handleSubmit} = useForm<IFormInput>();
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         login(data.email, data.password);
-        reset();
     };
 
     return (

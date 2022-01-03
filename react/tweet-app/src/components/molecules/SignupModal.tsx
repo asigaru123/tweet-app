@@ -17,11 +17,9 @@ interface IFormInput {
 export const SignupModal: VFC<Props> = (props) => {
     const {onClose, isOpen} = props;
     const {createUser} = useCreateUser();
-    const {register, reset, formState: { errors }, handleSubmit} = useForm<IFormInput>();
+    const {register, formState: { errors }, handleSubmit} = useForm<IFormInput>();
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
-        createUser(data.email, data.password, data.username);
-        onClose();
-        reset();
+        createUser(data.email, data.password, data.username, onClose);
     };
 
     return (
