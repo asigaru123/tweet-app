@@ -130,6 +130,10 @@ public class HomeService {
 		return homeMapper.insertTweetComment(tweetComment);
 	}
 	
+	public int deleteTweetComment(String email, int id) {
+		return homeMapper.deleteTweetComment(email, id);
+	}
+	
 	public int insertFollow(FollowResource resource) {
 		Follow follow = new Follow();
 		Date date = new Date();

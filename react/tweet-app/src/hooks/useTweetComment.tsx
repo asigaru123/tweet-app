@@ -19,6 +19,18 @@ export const useTweetComment = () => {
             setTweetCommentState(false);
         });
     };
+    const deleteTweetComment = (id?: Number) => {
+        setTweetCommentState(true);
+        axios.delete(`/api/home/deleteTweetComment/${loginUser.email}/${id}`, {headers: {Authorization: loginUser.token as string}})
+        .then((res) => {
+            showMessage({title: res.data as string, status: "success"});
+            setTweetCommentState(false);
+        })
+        .catch((res) => {
+            showMessage({title: res.data as string, status: "error"});
+            setTweetCommentState(false);
+        });
+    };
 
-    return {tweetCommentState, insertTweetComment};
+    return {tweetCommentState, insertTweetComment, deleteTweetComment};
 };

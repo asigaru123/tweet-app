@@ -36,6 +36,8 @@ public interface HomeMapper {
 	
 	public int insertTweetComment(TweetComment tweetComment);
 	
+	public int deleteTweetComment(String email, int id);
+	
 	public int insertFollow(Follow follow);
 	
 	public int deleteFollow(String email, String followemail);

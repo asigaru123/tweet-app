@@ -10,6 +10,8 @@ import { LikeButton } from "../atoms/LikeButton";
 import { FollowButton } from "../atoms/FollowButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "@chakra-ui/input";
+import { Button } from "@chakra-ui/react";
+import { useCurrentLoginUser } from "../../hooks/useCurrentLoginUser";
 
 type Props = {
     tweetId?: Number;
@@ -19,6 +21,7 @@ type Props = {
     insertTweetLike: (tweetId?: Number) => void;
     deleteTweetLike: (tweetId?: Number) => void;
     insertTweetComment: (tweetId?: Number, comment?: string) => void;
+    deleteTweetComment: (id?: Number) => void;
     insertFollow: (followemail?: string) => void;
     deleteFollow: (followemail?: string) => void;
     changeFollowState: boolean;
@@ -29,9 +32,10 @@ interface IFormInput {
 }
 
 export const AllTweetModal: VFC<Props> = (props) => {
-    const {tweetId, allTweets, onClose, isOpen, insertTweetLike, deleteTweetLike, insertTweetComment, insertFollow, deleteFollow, changeFollowState} = props;
+    const {tweetId, allTweets, onClose, isOpen, insertTweetLike, deleteTweetLike, insertTweetComment, deleteTweetComment, insertFollow, deleteFollow, changeFollowState} = props;
     const [targetTweet, setTargetTweet] = useState<TweetType>();
     const {isLike, isFollow} = useJadge();
+    const {loginUser} = useCurrentLoginUser();
 
     const onClickLike = () => {
         if(isLike(targetTweet)){
@@ -59,7 +63,6 @@ export const AllTweetModal: VFC<Props> = (props) => {
         insertTweetComment(tweetId, data.comment);
         reset();
     };
-
 
     return (
         <Modal onClose={onClose} isOpen={isOpen}>
@@ -103,7 +106,7 @@ export const AllTweetModal: VFC<Props> = (props) => {
                                         <Text fontSize="sm" fontWeight="bold" color="red">{errors.comment?.type === "required" && "何か入力してください"}</Text>
                                         <Text fontSize="sm" fontWeight="bold" color="red">{errors.comment?.type === "maxLength" && "100文字以内で入力してください"}</Text>
                                     </Box>
-                                    <Box w="25%" ml="auto" mt={4}>
+                                    <Box w="25%" ml="auto" textAlign="center" mt={4}>
                                         <Input type="submit" fontWeight="bold" backgroundColor="gray.300" _hover={{opacity: 0.7}} value="コメント"/>
                                     </Box>
                                 </form>
@@ -123,6 +126,11 @@ export const AllTweetModal: VFC<Props> = (props) => {
                                             <Text fontSize="xs">{commentResource.time}</Text>
                                             <Text fontSize="md">{commentResource.comment}</Text>
                                         </Box>
+                                        {loginUser.email === commentResource.email &&
+                                            <Box>
+                                                <Button backgroundColor="red.300" _hover={{opacity: 0.7}} onClick={() =>deleteTweetComment(commentResource.id)}>削除</Button>
+                                            </Box>
+                                        }
                                     </Flex>
                                 ))}
                                 </Stack>

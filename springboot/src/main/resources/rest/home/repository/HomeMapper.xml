@@ -74,6 +74,10 @@
 		INSERT INTO tweetcomment(email, tweetid, time, comment) VALUES(#{email}, #{tweetid}, #{time}, #{comment})
 	</insert>
 	
+	<delete id="deleteTweetComment">
+		DELETE FROM tweetcomment WHERE id=#{id} and email=#{email}
+	</delete>
+	
 	<insert id="insertFollow">
 		INSERT INTO follow(email, followemail, time) VALUES(#{email}, #{followemail}, #{time})
 	</insert>
