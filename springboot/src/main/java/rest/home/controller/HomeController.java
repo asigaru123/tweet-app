@@ -122,6 +122,19 @@ public class HomeController {
 		return responseEntity;
 	}
 	
+	@DeleteMapping("/deleteTweetComment/{email:.+}/{id}")
+	public ResponseEntity<String> deleteTweetComment(@PathVariable("email") String email, @PathVariable("id") int id){
+		int result = homeService.deleteTweetComment(email, id);
+		
+		ResponseEntity<String> responseEntity = null;
+		if(result > 0) {
+			responseEntity = new ResponseEntity<String>("コメントを削除しました", HttpStatus.OK);
+		}else {
+			responseEntity = new ResponseEntity<String>("コメントの削除に失敗しました", HttpStatus.BAD_REQUEST);
+		}
+		return responseEntity;
+	}
+	
 	@PostMapping("/insertFollow")
 	public ResponseEntity<String> insertFollow(@RequestBody FollowResource resource){
 		int result = homeService.insertFollow(resource);

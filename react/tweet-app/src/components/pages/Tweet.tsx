@@ -19,7 +19,7 @@ export const Tweet: VFC = () => {
     const {allTweets, getAllTweets} = useGetAllTweets();
     const {loginUser} = useCurrentLoginUser();
     const {tweetLikeState, insertTweetLike, deleteTweetLike} = useTweetLike();
-    const {tweetCommentState, insertTweetComment} = useTweetComment();
+    const {tweetCommentState, insertTweetComment, deleteTweetComment} = useTweetComment();
     const {changeFollowState, getMyFollow, insertFollow, deleteFollow} = useFollow();
     const [tweetId, setTweetId] = useState<Number>();
     const {getProfileImage} = useProfileImage();
@@ -85,6 +85,7 @@ export const Tweet: VFC = () => {
                 insertTweetLike={insertTweetLike}
                 deleteTweetLike={deleteTweetLike}
                 insertTweetComment={insertTweetComment}
+                deleteTweetComment={deleteTweetComment}
                 insertFollow={insertFollow}
                 deleteFollow={deleteFollow}
                 changeFollowState={changeFollowState}
